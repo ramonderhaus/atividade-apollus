@@ -13,9 +13,14 @@ export class AdicionarComponent implements OnInit {
   //INICIA O FORM
   formulario: FormGroup;
 
+  clientes = new Array();
+  tabela;
+  txt;
+  registros;
+  
   constructor(
     private formBuilder: FormBuilder,
-    private http: Http) {      
+    private http: Http) {
 
     //DEFINE OS CAMPOS
     this.formulario = this.formBuilder.group({
@@ -26,26 +31,29 @@ export class AdicionarComponent implements OnInit {
       
     });
 
+    this.lerTabela();
+
   }
 
   ngOnInit() {
   }
 
-  btnEnviar() {
-    console.log(this.formulario.value);
+  lerTabela() {    
+    this.tabela = localStorage.getItem("tbClientes");
+    this.clientes = JSON.parse(this.tabela);
+    
+    if (this.clientes == null) {
+      this.clientes = new Array();
+    }
+
   }
 
   onSubmit() {
-    console.log(this.formulario.value);
 
-    this.http.post('https://httpbin.org/post', 
-                    JSON.stringify(this.formulario.value))
-                    .subscribe(dados => {
-                      console.log(dados);
-                      //reseta o form
-                      this.resetar();
-                    },
-                    (error: any) => alert('Erro'));
+    this.clientes.push(this.formulario.value);
+    localStorage.setItem("tbClientes", JSON.stringify(this.clientes));
+    this.resetar();
+
   }
 
   resetar() {

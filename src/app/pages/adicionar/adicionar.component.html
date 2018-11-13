@@ -1,20 +1,32 @@
-<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
   <div class="container-fluid">
     <div class="row py-3">
       <div class="form-group col-md-12">
-        <label>Nome:</label>
-        <input class="form-control" formControlName="nome" id="nome">
+        Nome: <input class="form-control" formControlName="nome" id="nome">
       </div>
       <div class="form-group col-md-12">
         <label>E-mail:</label>
         <input class="form-control" formControlName="email" id="email">
       </div>
       <div class="form-group col-md-12">
-        <button type="submit" class="btn btn-primary" (click)="btnEnviar()">Enviar</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
         <button class="btn btn-danger ml-2" (click)="resetar()">Cancelar</button>
       </div>
-      <div class="form-group col-md-12">
-        <pre>{{ formulario.value | json }}</pre>
+    </div>
+    <div class="row mt-4 py-3">
+      <div class="col-md-12">
+        <h4 class="mb-3 text-center">Listagem de clientes</h4>
+      </div>
+      <div class="col-5"><strong>Nome</strong></div>
+      <div class="col-5"><strong>E-mail</strong></div>
+      <div class="col-2"><strong>Ações</strong></div>
+    </div>
+    <div class="row py-1" *ngFor="let client of clientes">
+      <div class="col-5">{{ client.nome }}</div>
+      <div class="col-5">{{ client.email }}</div>
+      <div class="col-2">
+        <button class="btn btn-sm btn-circle btn-primary" type="button"><i class="far fa-edit"></i></button>
+        <button class="btn btn-sm btn-circle btn-danger ml-1" type="button"><i class="far fa-trash-alt"></i></button>
       </div>
     </div>
   </div>

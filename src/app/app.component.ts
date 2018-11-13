@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'tarefa1';
+  title = 'Atividade Apollus';
   //teste commit
 }
