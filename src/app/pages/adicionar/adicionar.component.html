@@ -21,12 +21,13 @@
       <div class="col-5"><strong>E-mail</strong></div>
       <div class="col-2"><strong>Ações</strong></div>
     </div>
-    <div class="row py-1" *ngFor="let client of clientes">
-      <div class="col-5">{{ client.nome }}</div>
-      <div class="col-5">{{ client.email }}</div>
+    <div class="row py-1" *ngFor="let cliente of clientes; let i = index">
+      
+      <div class="col-5">{{ cliente.nome }}</div>
+      <div class="col-5">{{ cliente.email }}</div>
       <div class="col-2">
         <button class="btn btn-sm btn-circle btn-primary" type="button"><i class="far fa-edit"></i></button>
-        <button class="btn btn-sm btn-circle btn-danger ml-1" type="button"><i class="far fa-trash-alt"></i></button>
+        <button class="btn btn-sm btn-circle btn-danger ml-1" type="button" (click)="excluirRegistro(i)"><i class="far fa-trash-alt"></i></button>
       </div>
     </div>
   </div>

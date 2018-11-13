@@ -17,6 +17,7 @@ export class AdicionarComponent implements OnInit {
   tabela;
   txt;
   registros;
+  idRegistro = -1;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -47,13 +48,18 @@ export class AdicionarComponent implements OnInit {
     }
 
   }
+  
+  excluirRegistro(indiceRegistro: number){
+    if (confirm('Deseja excluir o registro?')) {
+      this.clientes.splice(indiceRegistro, 1);
+      localStorage.setItem("tbClientes", JSON.stringify(this.clientes));
+    }
+  }
 
   onSubmit() {
-
     this.clientes.push(this.formulario.value);
     localStorage.setItem("tbClientes", JSON.stringify(this.clientes));
     this.resetar();
-
   }
 
   resetar() {
