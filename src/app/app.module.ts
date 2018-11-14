@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ButtonModule } from './interface/button/button.module';
 import { NavModule } from './interface/nav/nav.module';
@@ -12,7 +13,7 @@ import { PanelModule } from './interface/panel/panel.module';
 import { CadastroModule } from './pages/cadastro/cadastro.module';
 import { SearchBarModule } from './interface/search-bar/search-bar.module';
 import { AdicionarModule } from './pages/adicionar/adicionar.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CatalogoModule } from './pages/catalogo/catalogo.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     AdicionarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CatalogoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
