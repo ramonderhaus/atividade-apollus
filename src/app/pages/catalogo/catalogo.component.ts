@@ -77,17 +77,16 @@ export class CatalogoComponent implements OnInit {
   }
 
   /********** FUNÇÕES TABELA CATÁLOGO **********/
-  inserirRegistro() {    
-    if (this.formulario.valid) {
-      if (this.id < 0) {
-        this.listagem.push(this.formulario.value);
-      } else {
-        this.listagem[this.id] = this.formulario.value;
-      }
-      localStorage.setItem("tbCatalogos", JSON.stringify(this.listagem));
-      this.atualizaTabela();
-      this.resetarForm();
+  inserirRegistro() {
+    this.atualizaTabela("tbCatalogos");
+    if (this.id < 0) {
+      this.listagem.push(this.formulario.value);
+    } else {
+      this.listagem[this.id] = this.formulario.value;
     }
+    localStorage.setItem("tbCatalogos", JSON.stringify(this.listagem));
+    this.atualizaTabela("tbCatalogos");
+    this.resetarForm();
   }
   
   editarRegistro(indiceRegistro: number){
