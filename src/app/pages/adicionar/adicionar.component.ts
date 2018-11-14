@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Http } from '@angular/http';
-
 @Component({
   selector: 'app-adicionar',
   templateUrl: './adicionar.component.html',
@@ -13,15 +11,12 @@ export class AdicionarComponent implements OnInit {
   //INICIA O FORM
   formulario: FormGroup;
 
-  clientes = new Array();
+  id: number = -1;
+  clientes;
   tabela;
-  txt;
   registros;
-  idRegistro = -1;
   
-  constructor(
-    private formBuilder: FormBuilder,
-    private http: Http) {
+  constructor(private formBuilder: FormBuilder) {
 
     //DEFINE OS CAMPOS
     this.formulario = this.formBuilder.group({
@@ -48,6 +43,25 @@ export class AdicionarComponent implements OnInit {
     }
 
   }
+
+  inserirRegistro() {
+    if (this.id < 0) {
+      this.clientes.push(this.formulario.value);
+    } else {
+      this.lerTabela();
+      this.clientes[this.id] = this.formulario.value;
+    }
+    localStorage.setItem("tbClientes", JSON.stringify(this.clientes));
+    this.resetarForm();
+  }
+  
+  editarRegistro(indiceRegistro: number){
+    this.formulario.patchValue({
+      nome: this.clientes[indiceRegistro].nome;
+      email: this.clientes[indiceRegistro].email;
+    });
+    this.id = indiceRegistro;
+  }
   
   excluirRegistro(indiceRegistro: number){
     if (confirm('Deseja excluir o registro?')) {
@@ -56,13 +70,8 @@ export class AdicionarComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    this.clientes.push(this.formulario.value);
-    localStorage.setItem("tbClientes", JSON.stringify(this.clientes));
-    this.resetar();
-  }
-
-  resetar() {
+  resetarForm() {
+    this.id = -1;
     this.formulario.reset();
   }
 
