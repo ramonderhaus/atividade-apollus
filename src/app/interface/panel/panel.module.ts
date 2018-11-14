@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { AdicionarModule } from '../../pages/adicionar/adicionar.module';
 import { CadastroModule } from '../../pages/cadastro/cadastro.module';
+import { CatalogoModule } from 'src/app/pages/catalogo/catalogo.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CadastroModule } from '../../pages/cadastro/cadastro.module';
     MatCardModule,
     MatTabsModule,
     AdicionarModule,
-    CadastroModule
+    CadastroModule,
+    CatalogoModule
   ],
   declarations: [
     PanelComponent

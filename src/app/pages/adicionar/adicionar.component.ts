@@ -22,8 +22,11 @@ export class AdicionarComponent implements OnInit {
     this.formulario = this.formBuilder.group({
 
       //NOME CAMPO: [VALUE, VALIDATOR]
-      nome: [null, [Validators.minLength(3), Validators.maxLength(20)]],
-      email: [null, [Validators.required, Validators.email]]
+      /*nome: [null, [Validators.minLength(3), Validators.maxLength(20)]],
+      email: [null, [Validators.required, Validators.email]]*/
+      status: [null],
+      codigo: [null],
+      descricao: [null]
       
     });
 
@@ -32,6 +35,7 @@ export class AdicionarComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
   lerTabela() {    
@@ -45,21 +49,21 @@ export class AdicionarComponent implements OnInit {
   }
 
   inserirRegistro() {
-    if (this.id < 0) {
-      this.clientes.push(this.formulario.value);
-    } else {
-      this.lerTabela();
-      this.clientes[this.id] = this.formulario.value;
+    
+    if (this.formulario.valid) {
+      if (this.id < 0) {
+        this.clientes.push(this.formulario.value);
+      } else {
+        this.clientes[this.id] = this.formulario.value;
+      }
+      localStorage.setItem("tbClientes", JSON.stringify(this.clientes));
+      this.resetarForm();
     }
-    localStorage.setItem("tbClientes", JSON.stringify(this.clientes));
-    this.resetarForm();
   }
   
   editarRegistro(indiceRegistro: number){
-    this.formulario.patchValue({
-      nome: this.clientes[indiceRegistro].nome;
-      email: this.clientes[indiceRegistro].email;
-    });
+    let item = this.clientes[indiceRegistro];
+    this.formulario.patchValue(item);
     this.id = indiceRegistro;
   }
   
